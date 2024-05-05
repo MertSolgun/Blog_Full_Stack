@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Blog App</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../assets/css/open-iconic-bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/animate.css" />
+    <link rel="stylesheet" href="../assets/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="../assets/css/magnific-popup.css" />
+
+    <link rel="stylesheet" href="../assets/css/aos.css" />
+
+    <link rel="stylesheet" href="../assets/css/ionicons.min.css" />
+
+    <link rel="stylesheet" href="../assets/css/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="../assets//css/jquery.timepicker.css" />
+
+    <link rel="stylesheet" href="../assets/css/flaticon.css" />
+    <link rel="stylesheet" href="../assets/css/icomoon.css" />
+    <link rel="stylesheet" href="../assets//css/style.css" />
+  </head>
+  <body>
+    <div id="colorlib-page">
+      <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+      <%- include("partials/_aside.ejs") %>
+      <!-- END COLORLIB-ASIDE -->
+
+      <div id="colorlib-main">
+        <section class="ftco-section ftco-no-pt ftco-no-pb">
+          <div class="container-fluid">
+            <div class="row d-flex">
+              <div class="col-xl-8 py-5 px-md-5">
+                <div class="row pt-md-4">
+                  <% data.forEach(post => { %>
+                  <div class="col-md-12">
+                    <div class="blog-entry ftco-animate d-md-flex">
+                      <img
+                        src="/uploads/<%= post.images[0] %>"
+                        alt=""
+                        width="150"
+                        style="border-radius: 20px; object-fit: cover"
+                        height="150"
+                        class="d-flex justify-content-center mx-auto"
+                      />
+
+                      <div class="text text-2 pl-md-4">
+                        <h3 class="mb-2">
+                          <p><%= post.title %></p>
+                        </h3>
+                        <div class="meta-wrap">
+                          <p class="meta">
+                            <span
+                              ><i class="icon-calendar mr-2"></i><%=
+                              post.createdAt.toLocaleString("tr") %></span
+                            >
+                            <span> <%= post.blogCategoryId.name %> </span>
+                          </p>
+                        </div>
+                        <p class="mb-4"><%- post.content.substring(0,400) %></p>
+                        <p class="mb-4">
+                          <strong>
+                            Author:<%= post.userId?.username.toUpperCase() %>
+                          </strong>
+                        </p>
+                        <p>
+                          <a href="/blog/<%=post.id%>" class="btn-custom"
+                            >Read More
+                            <span class="ion-ios-arrow-forward"></span
+                          ></a>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <% })%>
+                </div>
+              </div>
+              <div
+                class="col-xl-4 sidebar ftco-animate bg-light pt-5"
+                style="right: 0"
+              >
+                <div class="sidebar-box mobilCategory ftco-animate">
+                  <h3 class="sidebar-heading">Categories</h3>
+                  <ul class="categories">
+                    <% categories.forEach(category => { %>
+                    <li>
+                      <a href="/blog?filter[blogCategoryId]=<%= category.id %>"
+                        ><%= category.name %>
+                        <span><%= category.blogCount %></span></a
+                      >
+                    </li>
+                    <% }) %>
+                  </ul>
+                </div>
+
+                <div class="sidebar-box ftco-animate">
+                  <h3 class="sidebar-heading">Last Blogs</h3>
+                  <% lastBlogs.forEach(last => { %>
+                  <div class="block-21 mb-4 d-flex">
+                    <a href="/blog/<%=last.id%>">
+                      <img
+                        src="/uploads/<%= last.images[0] %>"
+                        alt=""
+                        width="120px"
+                        heigh="40px"
+                        style="object-fit: cover; border-radius: 5px"
+                      />
+                      <div class="text ml-3">
+                        <h3 class="heading">
+                          <p><%= last.title %></p>
+                        </h3>
+                        <div class="meta">
+                          <div>
+                            <a href="#"
+                              ><span class="icon-calendar"></span> <%=
+                              last.createdAt.toLocaleString("tr") %></a
+                            >
+                          </div>
+                          <div></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <% }) %>
+                </div>
+              </div>
+              <!-- END COL -->
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- END COLORLIB-MAIN -->
+    </div>
+    <!-- END COLORLIB-PAGE -->
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle
+          class="path-bg"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke="#eeeeee"
+        />
+        <circle
+          class="path"
+          cx="24"
+          cy="24"
+          r="22"
+          fill="none"
+          stroke-width="4"
+          stroke-miterlimit="10"
+          stroke="#F96D00"
+        />
+      </svg>
+    </div>
+
+    <script src="../assets/js/jquery.min.js"></script>
+    >
+    <script src="../assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.easing.1.3.js"></script>
+    <script src="../assets/js/jquery.waypoints.min.js"></script>
+    <script src="../assets/js/jquery.stellar.min.js"></script>
+    <script src="../assets/js/owl.carousel.min.js"></script>
+    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/js/aos.js"></script>
+    <script src="../assets/js/jquery.animateNumber.min.js"></script>
+    <script src="../assets/js/scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="../assets/js/google-map.js"></script>
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

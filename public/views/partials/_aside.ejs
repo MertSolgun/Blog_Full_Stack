@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight">
+      <nav id="colorlib-main-menu" role="navigation">
+        <ul>
+          <li class="colorlib-active"><a href="/">Home</a></li>
+          <hr />
+          <hr />
+          <% if(user) { %>
+          <p>
+            <strong>
+              <i class="icon-user"></i>
+              <%= user.username.toUpperCase() %>
+            </strong>
+          </p>
+          <li>
+            <button class="btn btn-secondary">
+              <a href="/user/logout" class="text-white"
+                ><strong>Logout</strong></a
+              >
+            </button>
+          </li>
+          <button class="btn btn-secondary mt-3">
+            <a href="/blog/admin" class="text-white text-decoration-none"
+              ><strong>Management Page</strong></a
+            >
+          </button>
+          <% } else{ %>
+          <li><a href="/user/login">Login</a></li>
+          <li><a href="/user/register">Register</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </aside>
+  </body>
+</html>
